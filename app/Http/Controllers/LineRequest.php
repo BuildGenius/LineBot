@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
 
 class LineRequest extends BaseController {
+    
     public function __construct(Request $request)
     {
         parent::__construct($request);
@@ -22,8 +23,8 @@ class LineRequest extends BaseController {
             $index_fragmentation = $this->db->select($this->db->raw("EXEC [dbo].[SP_CHK_FRAGMENTATION_IN_PERCENT]"));
             for ($i = 0;$i < count($index_fragmentation);$i++) {
                 $str = "Index Fragmentation"."  
-" . $index_fragmentation[$i]->want_to ."  
-" . $index_fragmentation[$i]->tablename;
+                " . $index_fragmentation[$i]->want_to ."  
+                " . $index_fragmentation[$i]->tablename;
                 $this->fire($str);
             }
         // }

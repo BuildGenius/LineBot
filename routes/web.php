@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LineRequest;
+use App\Http\Controllers\Line_branchCustomer;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,5 @@ Route::get('/', function () {
 
 Route::post('/LineRequest', [App\Http\Controllers\LineRequest::class, 'keepRequest']);
 Route::get('/LineRequest', [App\Http\Controllers\LineRequest::class, 'keepRequest']);
+
+Route::get('/Line', [Line_branchCustomer::class, 'Get_Request']);
