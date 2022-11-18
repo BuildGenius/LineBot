@@ -19,17 +19,21 @@ class LineRequest extends BaseController {
         // if (isset($this->data->destination)&&!isset($this->data->events)) {
         //     $response = 'is test completed';
         // } else {
-            $this->db = DB::connection('sqlsrvPRD');
+            $this->db = DB::connection('sqlsrv');
             $index_fragmentation = $this->db->select($this->db->raw("EXEC [dbo].[SP_CHK_FRAGMENTATION_IN_PERCENT]"));
-            for ($i = 0;$i < count($index_fragmentation);$i++) {
-                $str = "Index Fragmentation"."  
-                " . $index_fragmentation[$i]->want_to ."  
-                " . $index_fragmentation[$i]->tablename;
-                $this->fire($str);
+            if (count($index_fragmentation) > 0) {
+                for ($i = 0;$i < count($index_fragmentation);$i++) {
+                                $str = "Index Fragmentation"."  
+                                " . $index_fragmentation[$i]->want_to ."  
+                                " . $index_fragmentation[$i]->tablename;
+                                $this->fire($str);
+                            }
+            } else {
+                $result = $this->fire('PK is OK!');
             }
         // }
         
-        return response()->json(['message' => 'OK!']);
+        return response()->json($result);
     }
 
     function fire($text) {
