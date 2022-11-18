@@ -82,7 +82,7 @@ class Line_branchCustomer extends BaseController
 
         foreach ($validate as $key) {
             if (!isset($this->data[$key])) {
-                return throw new Code_Exception('1000', 'Request parameter [' . $key . ']');
+                throw new Code_Exception('1000', 'Request parameter [' . $key . ']');
             }
         }
     }
