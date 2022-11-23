@@ -24,14 +24,32 @@ Route::get('/', function () {
 });
 
 // Route::get('/ARCustomerCard', [App\Http\Controllers\libs\report\AR_CustomerCard_report::class, 'CreateReport']);
-Route::group(['prefix' => '/Downloads'], function () {
-    Route::get('/', [App\Http\Controllers\DownloadCenter::class, 'getDownloadFolder']);
-    Route::get('/report', [App\Http\Controllers\DownloadCenter::class, 'getReportFolder']);
-    Route::get('/report/{filename}', function ($filename) {
-        $report = new DownloadCenter($filename);
-        return $report->download($filename);
-    });
-});
+// Route::group(['prefix' => '/Downloads'], function () {
+//     Route::get('/', [App\Http\Controllers\DownloadCenter::class, 'getDownloadFolder']);
+//     Route::get('/storages', [App\Http\Controllers\DownloadCenter::class, 'getDownloadFolder']);
+//     Route::get('/storages/file', [App\Http\Controllers\DownloadCenter::class, 'getDownloadFolder']);
+//     Route::get('/report', [App\Http\Controllers\DownloadCenter::class, 'getReportFolder']);
+//     Route::get('/report/{filename}', function ($filename) {
+//         $report = new DownloadCenter($filename);
+//         return $report->download($filename);
+//     });
+// });
+// Route::get('/Downloads', function () {
+//     return redirect('/Downloads/storages');
+// });
+// Route::get('/Downloads/storages/{path?}/{subPath?}', function ($path = null, $subpath = null) {
+//     $DownloadCenter = new DownloadCenter;
+//     return $DownloadCenter->getDownloadFolder($path, $subpath);
+// });
+// Route::get('/Downloads/storages/{path?}/{subPath?}', function ($path = null, $subpath = null) {
+//     $DownloadCenter = new DownloadCenter;
+//     return $DownloadCenter->getDownloadFolder($path, $subpath);
+// });
+
+
+// http://127.0.0.1:8000/Downloads/storages/file/report/report_CustCard_112022.xlsx
+
+
 Route::post('/LineRequest', [App\Http\Controllers\LineRequest::class, 'keepRequest']);
 Route::get('/LineRequest', [App\Http\Controllers\LineRequest::class, 'keepRequest']);
 
