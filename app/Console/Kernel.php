@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Http\Controllers\libs\report\AR_CustomerCard_report;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
@@ -21,16 +22,12 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->call(function (Request $request) {
             $line = new LineRequest($request);
-            $line->db = DB::connection('sqlsrvPRD');
-            $index_fragmentation = $line->db->select($line->db->raw("EXEC [dbo].SP_CHK_FRAGMENTATION_IN_PERCENT"));
-
-            for ($i = 0;$i < count($index_fragmentation);$i++) {
-                $str = "Index Fragmentation"."  
-" . $index_fragmentation[$i]->want_to ."  
-" . $index_fragmentation[$i]->tablename;
-                $line->fire($str);
-            }
-        })->daily();
+            $CustReport = new AR_CustomerCard_report();
+            $text = $CustReport->CreateReport($request);
+            // var_dump($text);
+            $response = $line->fire($text);
+            var_dump($response);
+        })->everyMinute();
     }
 
     /**

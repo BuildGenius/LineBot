@@ -49,6 +49,8 @@ Route::get('/', function () {
 
 // http://127.0.0.1:8000/Downloads/storages/file/report/report_CustCard_112022.xlsx
 
+Route::get('/Downloads/file', [App\Http\Controllers\DownloadCenter::class, 'downloadFile']);
+
 
 Route::post('/LineRequest', [App\Http\Controllers\LineRequest::class, 'keepRequest']);
 Route::get('/LineRequest', [App\Http\Controllers\LineRequest::class, 'keepRequest']);

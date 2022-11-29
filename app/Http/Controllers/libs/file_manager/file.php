@@ -48,7 +48,7 @@ class file {
         $this->excel->setData($data);
         $this->excel->createFile();
         
-        return $this->excel->getPathFile();
+        return $this->excel->getPathFile() . '.' . $filetype;
     }
 
     public function getPath() {
